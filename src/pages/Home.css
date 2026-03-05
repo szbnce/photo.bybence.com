@@ -1,0 +1,252 @@
+.home-page {
+    /* Remove padding-bottom and let contents dictate height, container class removed from root */
+    width: 100%;
+}
+
+/* Base structural layout for the scrollable area */
+.home-content-section {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+}
+
+/* --- Full Screen Hero --- */
+
+.hero-fullscreen {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    /* Optional: background image or gradient can go here if the user desires */
+}
+
+/* Target the container specifically within hero to align text */
+.hero-fullscreen .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Scroll indicator positioned at the bottom */
+.scroll-indicator {
+    position: absolute;
+    bottom: var(--spacing-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition-normal);
+}
+
+.scroll-indicator:hover {
+    color: var(--text-primary);
+}
+
+.scroll-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* --- Split-View Introduction Section --- */
+
+.intro-split-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
+    align-items: center;
+    padding-bottom: var(--spacing-xxl);
+}
+
+@media (min-width: 768px) {
+    .intro-split-section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.intro-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.intro-portrait-img {
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    overflow: hidden;
+    /* Optional subtle shadow to lift the portrait off the dark background */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.intro-portrait-img img {
+    object-position: center;
+}
+
+.intro-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+}
+
+.intro-text-container .text-title {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+.intro-greeting {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.intro-body {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 90%;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.75rem 1.5rem;
+    margin-top: var(--spacing-md);
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all var(--transition-normal);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-accent);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+/* Masonry Grid Simulation with CSS Columns */
+.gallery-grid {
+    column-count: 1;
+    column-gap: var(--spacing-md);
+    display: block;
+    /* override any default block display just in case, removing grid */
+}
+
+@media (min-width: 640px) {
+    .gallery-grid {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-grid {
+        column-count: 3;
+    }
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    break-inside: avoid;
+    margin-bottom: var(--spacing-md);
+}
+
+.image-wrapper {
+    width: 100%;
+    /* remove static height so it respects the aspect ratio */
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+/* Need to override the Image.css behavior that forces height: 100% on the wrapper/img */
+.gallery-item .img-wrapper {
+    height: auto !important;
+}
+
+.image-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    /* override Image.css height */
+    object-fit: unset;
+    /* let aspect ratio be natural */
+    transition: transform 0.7s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    pointer-events: none;
+}
+
+.gallery-item:hover .image-wrapper img {
+    transform: scale(1.05);
+}
+
+.gallery-item:hover .image-overlay {
+    opacity: 1;
+}
+
+/* Reveal Animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-item {
+    animation: fadeUp 0.8s cubic-bezier(0.2, 1, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+.gallery-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.gallery-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.gallery-item:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.gallery-item:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.gallery-item:nth-child(6) {
+    animation-delay: 0.5s;
+}

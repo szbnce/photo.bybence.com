@@ -1,0 +1,220 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+}
+
+.accent-dot {
+    color: var(--text-secondary);
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    position: relative;
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 0.5rem;
+}
+
+.external-link {
+    color: var(--text-primary);
+}
+
+.icon-external {
+    opacity: 0.6;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.external-link:hover .icon-external {
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--text-primary);
+    transition: width var(--transition-normal);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0 4px;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 2px 4px;
+    transition: all var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.lang-btn:hover {
+    color: var(--text-primary);
+}
+
+.lang-btn.active {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.lang-separator {
+    color: var(--text-muted);
+    opacity: 0.3;
+    user-select: none;
+}
+
+.lang-flag {
+    margin-right: 4px;
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+/* Mobile Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    z-index: 101;
+}
+
+/* Toast Notification */
+.video-toast {
+    position: fixed;
+    top: calc(var(--header-height) + var(--spacing-md));
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--primary-accent);
+    color: var(--text-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 900;
+    pointer-events: none;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .navbar {
+        height: auto;
+        min-height: var(--header-height);
+    }
+
+    .navbar-container {
+        padding: 1rem var(--spacing-md);
+    }
+
+    .navbar-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-lg);
+        transform: translateY(-100%);
+        transition: all var(--transition-normal);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 99;
+    }
+
+    .navbar-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav-divider {
+        width: 60px;
+        height: 1px;
+        margin: var(--spacing-sm) 0;
+    }
+
+    .nav-link {
+        font-size: 1.25rem;
+    }
+}
