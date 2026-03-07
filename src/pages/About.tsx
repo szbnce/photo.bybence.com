@@ -42,7 +42,7 @@ export function About() {
 
                 <div className="about-image">
                     <Image
-                        src="/public/bence-portrait.jpg"
+                        src="/bence-portrait.jpg"
                         alt="Bence holding a camera"
                         loading="lazy"
                     />

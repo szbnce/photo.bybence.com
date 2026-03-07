@@ -66,7 +66,7 @@ export function Home() {
                 <section className="intro-split-section">
                     <div className="intro-image-container animate-fade-up">
                         <Image
-                            src="/public/bence-portrait.jpg"
+                            src="/bence-portrait.jpg"
                             alt="Bence Portrait"
                             className="intro-portrait-img"
                         />
